@@ -12,7 +12,7 @@ define('FEEDS_UPDATE_EXISTING', 2);
 
 // Default limit for creating items on a page load, not respected by all
 // processors.
-define('FEEDS_PROCESS_LIMIT', 50);
+define('FEEDS_PROCESS_LIMIT', 25);
 
 /**
  * Thrown if a validation fails.
