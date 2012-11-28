@@ -165,7 +165,13 @@ abstract class FeedsProcessor extends FeedsPlugin {
         $this->entityValidate($entity);
 
         // Allow modules to alter the entity before saving.
-        module_invoke_all('feeds_presave', $source, $entity, $item);
+        
+        // Cannot pass by ref anymore using module_invoke_all
+        //module_invoke_all('feeds_presave', $source, $entity, $item);
+        foreach (module_implements('feeds_presave') as $module) {
+          $function = $module . '_feeds_presave';
+          $function($source, $entity, $item);
+        }
         if (module_exists('rules')) {
           rules_invoke_event('feeds_import_'. $source->importer()->id, $entity);
         }
